@@ -1,0 +1,26 @@
+/* Aplico reset */
+
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos HTML */
+
+html{
+    background-color: aqua;
+}
+
+h1{
+    color: crimson;
+    margin-top: 30px;
+}
+
+/* Estilos HEADER */
+
+header form{
+    box-shadow: 2px 2px 5px;
+    background-color: whitesmoke;
+    margin-top: 80px;
+}

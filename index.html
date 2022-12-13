@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Integrador</title>
+</head>
+<body>
+
+    <h1>Agencia de viajes Aycaguer</h1>
+
+<header>
+    <form id="agenciaViajes" action="#" method="post">
+        <fieldset>
+            <legend>Datos a ingresar</legend>
+            <label for="txtNombre">Nombre</label>
+            <input type="text" placeholder="Ingrese su nombre" id="txtNombre"> <br>
+            <label for="txtEdad">Edad</label>
+            <input type="text" placeholder="Ingrese su edad" id="txtEdad"> <br>
+            <label for="cantPersonas">Numero de personas</label>
+            <input type="number" placeholder="Cantidad de personas" id="cantPersonas"> <br>
+            <select id="destino">
+                <option value="">Selecciona un destino</option>
+                <option value="Maldonado">Maldonado</option>
+                <option value="Colonia">Colonia</option>
+                <option value="Montevideo">Montevideo</option>
+                <option value="Rocha">Rocha</option>
+            </select>
+            <input type="button" value="Gestionar" id="btnGestionar">
+            <p id="resultado"></p>
+        </fieldset>
+    </form>
+</header>
+
+    <script src="./JS/scripts.js"></script>
+    <link rel="stylesheet" href="./CSS/styles.css">
+</body>
+</html>

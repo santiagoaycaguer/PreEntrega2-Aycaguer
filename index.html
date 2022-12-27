@@ -6,14 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Integrador</title>
 </head>
+
+<div id="contenedor">
+      <ul id="navPrincipal">
+          <div id="botonesLogYRegistro">
+            <li>
+                <input type="button" value="Login" id="btnLogin">
+            </li>
+            <li>
+                <input type="button" value="Registro" id="btnRegistro">
+            </li>
+          </div>
+          <div id="divMenuHuesped">
+            <li>
+                <input type="button" value="Salir" id="btnSalir">
+            </li>
+          </div>
+      </ul>
+      <h2 id="textoBienvenida">Bienvenido</h2>
+</div><!-- FIN CABEZAL -->
+
 <body>
 
     <h1>Agencia de viajes Aycaguer</h1>
 
 <header>
-    <form id="agenciaViajes" action="#" method="post">
+
+    <nav>
+        <ul>
+            <li><a href="Pages/Contacto.html">Contacto</a></li>
+        </ul>
+
+        <div id = "login">
+            <div id="contenido">
+                <h1>Login</h1>
+                <label for="inputUsuario">Usuario:</label>
+                <input type="text" id="inputUsuario"><br>
+                <br>
+                <label for="inputPass">Contraseña:</label>
+                <input type="password" id="inputPass"><br>
+                <br>
+                <input type="button" value="Ingresar" id ="btnIngreso"><br>
+                <p id = "devolucionLogin"></p>
+                <hr>
+            </div>
+        </div>
+    </nav>
+
+
+    <div id = "registro">
+        <div id="contenido">
+            <h1>Registro</h1>
+
+            <br><br>
+
+            <!-- Registro para Huesped -->
+            <div id ="registroHuesped">
+
+                <label for="inputANombre">Nombre Completo:</label>
+                <input type="text" id="inputANombre"><br>
+
+                <br>
+        
+                <label for="inputAUsuario">Usuario:</label>
+                <input type="text" id="inputAUsuario"><br>
+
+                <br>
+
+                <label for="inputAPass">Contraseña:</label>
+                <input type="password" id="inputAPass"><br>
+
+                <br>
+
+                <input type="button" value="Registrarse" id ="btnARegistro"><br>
+
+                <p id ="devolucionARegistro"></p>
+            </div>
+
+
+
+
+
+    <!--<form id="agenciaViajes" action="#" method="post">
         <fieldset>
-            <legend>Datos a ingresar</legend>
+            <legend>Datos a ingresar</legend> <br>
             <label for="txtNombre">Nombre</label>
             <input type="text" placeholder="Ingrese su nombre" id="txtNombre"> <br>
             <label for="txtEdad">Edad</label>
@@ -26,13 +102,34 @@
                 <option value="Colonia">Colonia</option>
                 <option value="Montevideo">Montevideo</option>
                 <option value="Rocha">Rocha</option>
-            </select>
+            </select> <br> <br>
+            <legend>Escoja un paquete de viajes</legend> <br>
+            <div>Paquete Turista</div>
+                <input type="radio" id="pack1" value="Turista">
+            <div>Paquete Ejecutivo</div>
+                <input type="radio" id="pack2" value="Ejecutivo"> <br>
+    
             <input type="button" value="Gestionar" id="btnGestionar">
             <p id="resultado"></p>
         </fieldset>
-    </form>
+    </form>-->
+
 </header>
 
+
+
+
+<footer>
+    <ul>
+        <li><a href="https://www.facebook.com/login/" target="_blank"><img class="insta" src="./IMG/Facebook.jpg" alt=""></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank"><img class="face" src="./IMG/Instagram.jpg" alt=""></a></li>
+        <li><a href="https://twitter.com/?lang=es" target="_blank"><img class="twitt" src="./IMG/Twitter.jpg" alt=""></a></li>
+    </ul>
+
+    <h4>Todos los derechos reservados</h4>
+</footer>
+
+    <script src="./JS/class.js"></script>
     <script src="./JS/scripts.js"></script>
     <link rel="stylesheet" href="./CSS/styles.css">
 </body>

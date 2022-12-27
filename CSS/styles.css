@@ -1,26 +1,132 @@
 /* Aplico reset */
 
 *{
-    margin: 0;
-    border: 0;
+    margin:0 ;
+    padding:0 ;
     box-sizing: border-box;
 }
 
 /* Estilos HTML */
 
 html{
-    background-color: aqua;
+    height: 100%;
 }
 
 h1{
     color: crimson;
     margin-top: 30px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
+
+/* Estilos MENU */
+
+header nav{
+    justify-content: center;
+}
+
+header nav ul{
+    text-align: center;
+}
+
+header nav ul li{
+    margin-inline: 10px;
+    display: inline-block;
+    border-radius: 25px;
+    font-weight: bold;
+    list-style: none;
+    background-color: rgba(205, 224, 34, 0.911);
+    padding: 5px;
+    margin-bottom: 40px;
+}
+
+header nav ul li:hover{
+    background-color: gold;
+    box-shadow: 1px 8px 10px black;
+    transform: rotate(7deg);
+}
+
+header nav ul li a{
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgb(0, 81, 128);
+}
+
+
+/* Estilos GENERALES */
+
+.volver{
+    background-color: rgb(0, 0, 0);
+    color: greenyellow;
+    list-style: none;
+}
+
+.volver:hover{
+    box-shadow: 1px 5px 8px black;
+}
+
+body{
+    background-image: linear-gradient(to right,rgb(21, 114, 161),
+    rgb(154, 208, 236),
+    rgb(239, 218, 215),
+    rgb(227, 190, 198));
+}
+
+/* Estilos FOOTER */
+
+footer ul li{
+    display: inline;
+    margin-inline: 10px;
+}
+
+footer ul{
+    margin-bottom: 30px;
+}
+
+footer{
+    text-align: center;
+}
+
+footer .insta{
+    width: 3%;
+}
+
+footer .face{
+    width: 3%;
+}
+
+footer .twitt{
+    width: 3%;
+}
+
+
 /* Estilos HEADER */
+
+
 
 header form{
     box-shadow: 2px 2px 5px;
     background-color: whitesmoke;
     margin-top: 80px;
+}
+
+
+/* Estilos CONTACTO */
+
+form{
+    background-image: linear-gradient(to bottom, rgb(21, 114, 161),
+    rgb(154, 208, 236),
+    rgb(239, 218, 215),
+    rgb(227, 190, 198));
+    margin: 60px;
+}
+
+form div fieldset{
+    color: whitesmoke;
+}
+
+.datos{
+    color: gold;
+    text-align: center;
 }

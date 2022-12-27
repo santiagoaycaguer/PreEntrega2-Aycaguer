@@ -1,16 +1,229 @@
 window.addEventListener("load",inicio);
 
+
+let huespedesRegistrados= []; // lista que mantiene los huespedes registrados
+
+let UsuarioActual= null; // husped que esta logeado en este momento
+
+let error = ""; //guarda el msj de error de las funciones
+
+
 function inicio() {
-    document.querySelector("#btnGestionar").addEventListener("click",agenciaViajes);
+
+    document.querySelector("#btnLogin").addEventListener("click",DivMostrarLogin);
+
+    document.querySelector("#btnRegistro").addEventListener("click",DivMostrarRegistrar);
+
+    document.querySelector("#btnRegistro").addEventListener("click",DivMostrarRegistroHuesped);
+
+    document.querySelector("#btnARegistro").addEventListener("click",RegistrarHuesped);
+
+    document.querySelector("#btnIngreso").addEventListener("click",IngresarUsuario);
+
+    document.querySelector("#btnSalir").addEventListener("click",Salir);
+
+    /*document.querySelector("#btnGestionar").addEventListener("click",agenciaViajes);*/
+
+    OcultarDivsMenuInicial();
+
+    huespedesRegistrados.push(new Huesped("Santiago","Santi1","Santi1","A","098244181","santiagoaycaguer@gmail.com","CI","5.222.111-6", huespedesRegistrados[0])); //precargo un huesped
 }
 
-// AGENCIA DE VIAJES---PROYECTO INTEGRADOR
+function OcultarDivsMenuInicial(){
+    document.querySelector("#login").style.display = "none";
+    document.querySelector("#registro").style.display = "none";
+    document.querySelector("#registroHuesped").style.display = "none";
+    document.querySelector("#divMenuHuesped").style.display = "none";
+}
 
-// Preentrega 1
 
-alert("Bienvenidos!! ¿Maletas listas para su nuevo destino?!!")
+function DivMostrarLogin(){
 
-function agenciaViajes() {
+    OcultarDivsMenuInicial();
+
+    document.querySelector("#login").style.display = "block";
+}
+
+function DivMostrarRegistrar(){
+
+    OcultarDivsMenuInicial();
+
+    document.querySelector("#registro").style.display = "block";
+}
+
+function DivMostrarRegistroHuesped(){
+
+    document.querySelector("#registroHuesped").style.display = "block";
+}
+
+function RegistrarHuesped(){
+
+    let nombre= document.querySelector("#inputANombre").value; //guardo el nombre que ingreso el usuario
+
+    let usuario =  document.querySelector("#inputAUsuario").value; //guardo el usuario que ingreso el usuario
+
+    let pass =  document.querySelector("#inputAPass").value; //guardo la contraseña que ingreso el usuario
+
+    document.querySelector("#devolucionARegistro").innerHTML= "" //limpio la devolucion
+    error = ""; //pongo el error en blanco
+
+    let casillavacia = EstaVacio(nombre) || EstaVacio(usuario) || EstaVacio(pass); //guardo en casilla vacia si alguno de los inputs esta en blanco
+
+    if (casillavacia) // si esta en blanco devuelvo el error
+   {
+        document.querySelector("#devolucionARegistro").innerHTML = error;
+   }
+   else //si no esta en blanco compruebo que la contraseña se correcta
+   {
+        if (!CumplePassword(pass)) //si la contraseña es incorrecta entonces :
+        {
+            document.querySelector("#devolucionARegistro").innerHTML = error;
+        }
+        else // si cumple entonces:
+        {
+            let existeotrousuarioigual = false; // inicio si existe otro usuario como falso
+            for (const huesped of huespedesRegistrados) { // voy usuario por usuario chequiando si tienen el mismo usuario
+                if(huesped.usuario == usuario)
+                {
+                    existeotrousuarioigual = true; // si encuentro otro con el mismo usuario convierto en verdadero
+                    error = "Existe un usuario con el mismo nombre"
+                }
+            }
+            if(existeotrousuarioigual) // si existe otro usuario con el mismo usuario devuelvo el error
+            {
+                document.querySelector("#devolucionARegistro").innerHTML = error;
+            }
+            else //si no habia otro usuario con el mismo usuario ya pase todas las pruebas
+            {
+                let nuevoHuesped = new Huesped(nombre,pass,usuario,) // creo el huesped nuevo
+                huespedesRegistrados.push(nuevoHuesped); // lo agrego a la lista de huespedes registrados
+
+                document.querySelector("#inputANombre").value = "";
+                document.querySelector("#inputAUsuario").value = "";
+                document.querySelector("#inputAPass").value = "";
+                document.querySelector("#devolucionARegistro").innerHTML = "Registro Exitoso";
+            }
+        }
+   }
+
+}
+
+
+function EstaVacio(texto)
+{
+    let devolucion = false;
+    if (texto == "")
+    {
+        devolucion = true;
+        error = "Una casilla esta vacia"
+    }
+    return devolucion;
+}
+
+
+function CumplePassword(password)
+{
+    let devolucion = true;
+    let numerodemayusculas = 0;
+    let numerodeminusculas = 0;
+    let numerodenumeros = 0;
+    if (password.length < 4)
+    {
+        devolucion = false;
+        error = "La contraseña tiene menos de 4 caracteres <br>"
+    }
+    for (let index = 0; index < password.length; index++) { // voy letra por letra de la password
+        let letra = password.charAt(index); //guardo la letra
+        if (letra.charCodeAt(0) >= "A".charCodeAt(0) && letra.charCodeAt(0) <= "Z".charCodeAt(0)) //chequeo si es mayuscula
+        {
+            numerodemayusculas++ //sumo uno a mayusculas
+        }
+        else if(letra.charCodeAt(0) >= "a".charCodeAt(0) && letra.charCodeAt(0) <= "z".charCodeAt(0))
+        {
+            numerodeminusculas ++; //sumo una minuscula
+        }
+        else if(!isNaN(parseInt(letra)))
+        {
+            numerodenumeros++;
+        }
+        
+    }
+    
+    if(numerodemayusculas == 0) //Si encuentra al menos una mayuscula el numero es diferente de 0 entonces no devuelve falso
+    {
+        devolucion = false;
+        error += "La contraseña requiere al menos una mayuscula <br>"
+    }
+    
+    if (numerodeminusculas == 0)
+    {
+        devolucion = false;
+        error += "La contraseña requiere al menos una minuscula <br>"
+    }
+    
+    if (numerodenumeros == 0)
+    {
+        devolucion = false;
+        error += "La contraseña requiere al menos un numero <br>"
+    }
+    
+    return devolucion;
+}
+
+
+function IngresarUsuario()
+{
+    document.querySelector("#devolucionLogin").innerHTML = "" //limpio la devolucion del login
+
+    let usuario = document.querySelector("#inputUsuario").value; //guardo el usuario ingresado
+
+    let pass = document.querySelector("#inputPass").value; //guardo la contraseña ingresada
+
+    let nohaycoincidencia = true; //creo una variable de que no hay coincidencia en el usuario
+
+    for (const Huesped of huespedesRegistrados) { //busco coincidencias con los huespedes
+        if (Huesped.usuario == usuario) //si encuentro un huesped con el mismo usuario que el ingresado entro al if
+        {
+            if(Huesped.contraseña == pass) //si la contraseña coincide ingreso al if
+            {
+                nohaycoincidencia = false; //hay coincidencia
+                UsuarioActual = Huesped; //el usuario actual es el huesped con mismo usuario y pass
+                LoginHuesped(); //llamo a la funcion de que entro un huesped
+                document.querySelector("#textoBienvenida").innerHTML = "Bienvenido " + UsuarioActual.nombre
+            }
+        }
+    }
+
+    if (nohaycoincidencia) //si no hay coincidencia
+    {
+        document.querySelector("#devolucionLogin").innerHTML = "Usuario y/o contraseña incorrectos" //devuelvo el error
+    }
+
+    document.querySelector("#inputUsuario").value = "";
+    document.querySelector("#inputPass").value = "";
+}
+
+
+function LoginHuesped(){
+    OcultarDivsMenuInicial(); //oculto todos los divs
+    document.querySelector("#botonesLogYRegistro").style.display="none"; //oculto el menu de registro y login
+    document.querySelector("#divMenuHuesped").style.display = "block"; //muestro
+}
+
+
+function Salir(){
+    OcultarDivsMenuInicial();
+    document.querySelector("#botonesLogYRegistro").style.display = "block";
+    UsuarioActual=null; 
+    document.querySelector("#textoBienvenida").innerHTML = "Bienvenido ";
+}
+
+
+
+
+//alert("Bienvenidos!! ¿Maletas listas para su nuevo destino?!!")
+
+/*function agenciaViajes() {
     let edad= document.querySelector("#txtEdad").value;
     let cliente= document.querySelector("#txtNombre").value;
     let costo= 0;
@@ -46,30 +259,6 @@ function agenciaViajes() {
     document.querySelector("#resultado").innerHTML= mensaje;
 }
 
-//Preentrega 2
-// OBJETOS
-
-class Pack{
-    constructor(nombre, unidadPrecio, precio, contenido) {
-        this.nombre= nombre;
-        this.unidadPrecio= unidadPrecio;
-        this.precio= parseFloat(precio);
-        this.contenido= contenido;
-    }
-
-    toString() {
-        return this.nombre.toUpperCase() + " (" + this.precio.toFixed(2) + ") " + this.contenido;
-    }
-
-    sumarIva(){
-        this.precio= this.precio * 1.21;
-        return this.precio.toFixed(2);
-    }
-
-    getDescuento(porcentaje){
-        return (this.precio * (porcentaje/100)).toFixed(2);
-    }
-}
 
 let packTurista= new Pack("Turista", "$", "3990.990",  "3 días en Hotel 3 estrellas con desayuno incluido");
 //console.log("Información pack Turista", packTurista);  
@@ -83,20 +272,6 @@ let packEjecutivo= new Pack("Ejecutivo", "$", "9990.990", "7 días en Hotel 5 es
 //console.log("Pack Ejecutivo con IVA incluido:", packEjecutivo.sumarIva());
 //console.log("Pack Ejecutivo con descuento de:", packEjecutivo.getDescuento(6));
 
-class Huesped{
-    constructor(nombres, apellidos, telefono, correo, tipoDocumento, numeroDocumento) {
-        this.nombres= nombres;
-        this.apellidos= apellidos;
-        this.telefono= telefono;
-        this.correo= correo;
-        this.tipoDocumento= tipoDocumento;
-        this.numeroDocumento= numeroDocumento;
-    }
-
-    toString() {
-        return this.nombres + ", " + this.apellidos;
-    }
-}
 
 let huesped1= new Huesped("Alfredo", "Alonso", "098144355", "aloalfre@gmail.com", "DNI", "1.222.333-4")
 //console.log("Los valores del objeto son", huesped1);
@@ -121,16 +296,12 @@ console.log("La lista de todos los huespedes son:", listaHuespedes);
 
 // Buscador de huespedes (visto del lado de la empresa)
 
-let huespedBuscado= prompt("Ingrese el nombre del huesped a buscar");
-/*let isExist= listaHuespedes.includes(huespedBuscado);
-if (isExist) {// Encontre al huesped
+//let huespedBuscado= prompt("Ingrese el nombre del huesped a buscar");
+let isExist= listaHuespedes[0].nombres.toUpperCase().includes(huespedBuscado);
+let isExist1= listaHuespedes[1].nombres.toUpperCase().includes(huespedBuscado);
+let isExist2= listaHuespedes[2].nombres.toUpperCase().includes(huespedBuscado);
+if (isExist || isExist1 || isExist2) {// Encontre al huesped
     console.log("Encontraste al huesped buscado");
 } else {// No se encontro
     console.log("No se encontro al huesped buscado");
 }*/
-
-if (listaHuespedes.nombres== huespedBuscado) {
-    console.log("Encontraste al huesped buscado");
-} else {// No se encontro
-    console.log("No se encontro al huesped buscado");
-}
